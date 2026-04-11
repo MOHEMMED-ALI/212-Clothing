@@ -19,7 +19,7 @@
   <main class="container">  
     <div class="image-box">
       <div class="main-image">
-      <img id="mainProductImage" src="/Slides/Slide.jpg" alt="Driver Hoodie">
+      <img id="mainProductImage" src="/Slides/Slide.jpg" alt="Biker Slides">
       </div>
       <div class="thumbnails">
         <img id="thumbnailFront" src="/Slides/Slide.jpg" alt="Front" class="active" onclick="changeView('front')">
@@ -28,15 +28,17 @@
       </div>
     </div>
     <div class="details">
-      <h2>Driver Hoodie</h2>
-      <p>Stay warm and stylish with our premium driver hoodie. Designed for comfort and durability, it’s the perfect fit for all drivers on the road.</p>
+      <h2>Biker Slides</h2>
+      <p>Stay warm and stylish with our premium biker slides. Designed for comfort and durability, they’re the perfect fit for all riders on the road.</p>
       <p class="price">$39.99</p>
       <p><strong>Sizes:</strong> S, M, L, XL, XXL</p>
       <div class="color-options">
         <strong>Colors:</strong>
-        <button class="color-swatch active" style="background-color: rgb(0, 0, 0);" data-color="gray" onclick="selectColor('gray')"></button>
-        <button class="color-swatch" style="background-color: rgb(128, 128, 128);" data-color="black" onclick="selectColor('black')"></button>
+        <button class="color-swatch active" style="background-color: green;" data-color="gray" onclick="selectColor('gray')"></button>
+        <button class="color-swatch" style="background-color: gray;" data-color="black" onclick="selectColor('black')"></button>
         <button class="color-swatch" style="background-color: blue;" data-color="blue" onclick="selectColor('blue')"></button>
+        <button class="color-swatch" style="background-color: red;" data-color="red" onclick="selectColor('red')"></button>
+        <button class="color-swatch" style="background-color: orange;" data-color="orange" onclick="selectColor('orange')"></button>
       </div>
       <button class="button" onclick="window.open('https://my-store-e6f49b.creator-spring.com/listing/spirit-of-the-ride?product=212&variation=5819', '_blank')">Buy Now</button>
     </div>
@@ -53,41 +55,36 @@
   // Define your product images. Adjust paths and colors as needed.
   // IMPORTANT: Ensure these image files exist in your project structure.
   const productImages = {
-    'hoodie': {
+    'Slide': {
       'green': {
         'front': '/Slides/Slide.jpg', // Example: You need to create these images
         'back': '/Slides/Slide².jpg',   // Example: You need to create these images
         'side': '/Slides/Slide²².jpg'   // Example: You need to create these images
       },
-      'black': {
-        'front': '/Slides/Slide.jpg', 
-        'back': '/Slides/Slide².jpg',
-        'side': '/Slides/Slide²².jpg'
+      'yellow': {
+        'front': '/Slides/Slide²²².jpg', 
+        'back': '/Slides/Slide²²²².jpg',
+        'side': '/Slides/Slide²²²²².jpg'
       },
-      'blue': {
-        'front': '/Slides/Slide.jpg',
-        'back': '/Slides/Slide².jpg',
-        'side': '/Slides/Slide²².jpg'
-      }
-    },
-    // Add other product types (e.g., 'tshirt') here with their respective colors and images
-    'tshirt': {
-      'black': {
-        'front': 'T-Shirt_Black_Front.jpg',
-        'back': 'T-Shirt_Black_Back.jpg'
-      },
-      'white': {
-        'front': 'T-Shirt_White_Front.jpg',
-        'back': 'T-Shirt_White_Back.jpg'
+      'gray': {
+        'front': '/Slides/Slide-Gray.jpg',
+        'back': '/Slides/Slide-Gray1.jpg',
+        'side': '/Slides/Slide-Gray2.jpg'
       },
       'red': {
-        'front': 'T-Shirt_Red_Front.jpg',
-        'back': 'T-Shirt_Red_Back.jpg'
+        'front': '/Slides/Slide-Red.jpg',
+        'back': '/Slides/Slide-Red1.jpg',
+        'side': '/Slides/Slide-Red2.jpg'
+      },
+      'orange': {
+        'front': '/Slides/Slide-Orange.jpg',
+        'back': '/Slides/Slide-Orange1.jpg',
+        'side': '/Slides/Slide-Orange2.jpg'
       }
-    }
+    },
   };
 
-  let currentProductType = 'hoodie'; // Set the current product type (e.g., 'hoodie', 'tshirt')
+  let currentProductType = 'Slide'; // Set the current product type (e.g., 'hoodie', 'tshirt')
   let selectedColor = 'gray'; // Default selected color
   let selectedView = 'front'; // Default selected view
 
