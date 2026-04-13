@@ -255,3 +255,263 @@ nav a:hover::after {
   filter: invert(1) opacity(1) drop-shadow(0 0 5px var(--neon-orange));
   transform: scale(1.3) rotate(15deg);
 }
+
+.cart-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.cart-modal-content {
+  background-color: var(--card-bg);
+  margin: 10% auto; /* 10% from the top and centered */
+  padding: 30px;
+  border: 1px solid #333;
+  width: 80%; /* Could be more or less, depending on screen size */
+  max-width: 600px;
+  border-radius: 15px;
+  position: relative;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+  animation: slideInTop 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInTop {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: var(--neon-orange);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cart-modal-content h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2rem;
+}
+
+.cart-items {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding-right: 10px; /* For scrollbar */
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #222;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item img {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  margin-right: 15px;
+  object-fit: cover;
+  border: 1px solid #444;
+}
+
+.cart-item-details {
+  flex-grow: 1;
+}
+
+.cart-item-details h4 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.cart-item-details p {
+  margin: 5px 0 0;
+  color: #bbb;
+  font-size: 0.9rem;
+}
+
+.cart-item-price {
+  color: var(--neon-green);
+  font-weight: bold;
+  font-size: 1rem;
+  margin-left: 15px;
+}
+
+.remove-item-button {
+  background-color: #ff4500; /* Neon orange */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.8em;
+  transition: background-color 0.3s;
+}
+
+.remove-item-button:hover {
+  background-color: #e03e00;
+}
+
+.cart-summary {
+  text-align: right;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #222;
+}
+
+.cart-summary p {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.cart-summary .button {
+  margin-left: 10px;
+  width: auto;
+  display: inline-block;
+  padding: 12px 30px;
+  font-size: 1rem;
+}
+
+.cart-summary .clear-cart-button {
+  background-color: #555;
+}
+
+.cart-summary .clear-cart-button:hover {
+  background-color: #777;
+}
+
+/* Make the icon white using a filter */
+.cart-img-white {
+  width: 28px;
+  height: auto;
+  filter: invert(1); /* This turns the black icon white */
+  transition: transform 0.3s ease;
+}
+
+.nav-cart-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.nav-cart-link:hover .cart-img-white {
+  transform: scale(1.1);
+}
+
+/* The red notification circle */
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: 5px;
+  background: #ff4500; /* Neon Orange/Red to match your theme */
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: bold;
+  min-width: 15px;
+  text-align: center;
+  border: 2px solid #000; /* Separates it from the icon */
+}
+
+/* Make the icon white using a filter */
+.cart-img-white {
+  width: 28px;
+  height: auto;
+  filter: invert(1); /* This turns the black icon white */
+  transition: transform 0.3s ease;
+}
+
+.nav-cart-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.nav-cart-link:hover .cart-img-white {
+  transform: scale(1.1);
+}
+
+/* The red notification circle */
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: 5px;
+  background: #ff4500; /* Neon Orange/Red to match your theme */
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: bold;
+  min-width: 15px;
+  text-align: center;
+  border: 2px solid #000; /* Separates it from the icon */
+}
+
+nav {
+  display: flex;
+  align-items: center; /* Vertically centers the text and the cart icon */
+  gap: 20px;           /* Adjust this number to control spacing between links */
+}
+
+.nav-cart-link {
+  margin-left: 10px;   /* Adds a little extra breathing room for the cart icon */
+  display: flex;
+  align-items: center;
+}
+
+/* Ensure the cart image doesn't force the header to grow taller */
+.cart-img-white {
+  width: 24px;         /* Match the font size height of your text links */
+  height: 24px;
+  object-fit: contain;
+}
+
+.cart-quantity-control {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-qty-input {
+  width: 50px;
+  padding: 4px;
+  border-radius: 5px;
+  background: #222;
+  color: #fff;
+  border: 1px solid #555;
+  text-align: center;
+}

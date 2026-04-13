@@ -600,3 +600,74 @@ button:active {
   text-align: center;
   border: 2px solid #000; /* Separates it from the icon */
 }
+
+/* Make the icon white using a filter */
+.cart-img-white {
+  width: 28px;
+  height: auto;
+  filter: invert(1); /* This turns the black icon white */
+  transition: transform 0.3s ease;
+}
+
+.nav-cart-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.nav-cart-link:hover .cart-img-white {
+  transform: scale(1.1);
+}
+
+/* The red notification circle */
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: 5px;
+  background: #ff4500; /* Neon Orange/Red to match your theme */
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: bold;
+  min-width: 15px;
+  text-align: center;
+  border: 2px solid #000; /* Separates it from the icon */
+}
+
+nav {
+  display: flex;
+  align-items: center; /* Vertically centers the text and the cart icon */
+  gap: 20px;           /* Adjust this number to control spacing between links */
+}
+
+.nav-cart-link {
+  margin-left: 10px;   /* Adds a little extra breathing room for the cart icon */
+  display: flex;
+  align-items: center;
+}
+
+/* Ensure the cart image doesn't force the header to grow taller */
+.cart-img-white {
+  width: 24px;         /* Match the font size height of your text links */
+  height: 24px;
+  object-fit: contain;
+}
+
+.cart-quantity-control {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-qty-input {
+  width: 50px;
+  padding: 4px;
+  border-radius: 5px;
+  background: #222;
+  color: #fff;
+  border: 1px solid #555;
+  text-align: center;
+}
