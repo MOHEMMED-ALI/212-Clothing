@@ -14,6 +14,10 @@
       <a href="/Index.html">Home</a>
       <a href="/Hoodies/Hoodies.html">Products</a>
 <a href="/Contact">Contact</a>
+      <a href="#" id="cartIcon" class="nav-cart-link">
+        <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart" class="cart-img-white">
+        <span id="cartItemCount" class="cart-badge">0</span>
+      </a>
     </nav>
   </header>
   <main class="container">
@@ -22,17 +26,29 @@
         <img id="mainProductImage" src="Hoodie7².jpg" alt="Classic Biker T-Shirt">
       </div>
       <div class="thumbnails">
-        <img src="Hoodie7².jpg" alt="Front" class="active" onclick="changeImage(this)">
-        <img src="Hoodie7.jpg" alt="Back"  onclick="changeImage(this)">
+        <img id="thumbnailFront" src="Hoodie7².jpg" alt="Front" class="active" onclick="changeView('front')">
+        <img id="thumbnailBack" src="Hoodie7.jpg" alt="Back"  onclick="changeView('back')">
       </div>
     </div>
     <div class="details">
-      <h2>Driver Hoodie</h2>
+      <h2 id="productName">Driver Hoodie</h2>
       <p>Stay warm and stylish with our premium driver hoodie. Designed for comfort and durability, it’s the perfect fit for all drivers on the road.</p>
-      <p class="price">$39.99</p>
-      <p><strong>Sizes:</strong> S, M, L, XL, XXL</p>
-      <p><strong>Colors:</strong> Gray, Black, Blue</p>
-      <button class="button"  onclick="window.open('https://my-store-e6f49b.creator-spring.com/listing/new-born-biker?product=212&variation=5818', '_blank')">Buy Now</button>
+      <p class="price">$<span id="productPrice">39.99</span></p>
+      <p><strong>Sizes:</strong>
+      <select id="productSize" style="padding: 10px; border-radius: 5px; background: #222; color: #fff; border: 1px solid #444;">
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+      </select>
+      </p>
+      <div class="color-options">
+      <strong>Colors:</strong>
+      <button class="color-swatch active" style="background-color: white;" data-color="white" onclick="selectColor('white')"></button>
+    </div> 
+        <button class="button" id="addToCartButton" style="margin-bottom: 10px; border-radius: 50px; padding: 12px 30px; background-color: #ff4500; font-weight: bold;">Add to Cart</button>
+        <button class="button" onclick="window.open('https://my-store-e6f49b.creator-spring.com/listing/new-born-biker?product=212&variation=5818', '_blank')" style="border-radius: 50px; padding: 12px 30px;">Buy Now (Direct)</button>  
     </div>
   </main>
   <footer class="footer" id="contact">
@@ -41,16 +57,79 @@
       <a href="https://www.instagram.com/212clothing.ma?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
       </a>
+      <a href="https://www.facebook.com/212clothing.ma" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174848.png" alt="Facebook">
+      </a>
+      <a href="https://www.tiktok.com/@212clothing.ma?_r=1&_t=ZS-95SiawBc43A" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+      </a>
     </div>
   </footer>
   <script>
-    function changeImage(thumb) {
-      const mainImage = document.getElementById("mainProductImage");
-      mainImage.src = thumb.src;
+  const productImages = {
+    'Hoodie': {
+      'white': {
+        'front': '/Hoodies/Hoodie7.jpg',
+        'back': '/Hoodies/Hoodie7².jpg',
+      },
+    },
+  };
 
-      document.querySelectorAll(".thumbnails img").forEach(img => img.classList.remove("active"));
-      thumb.classList.add("active");
+  let currentProductType = 'Hoodie'; 
+  let selectedColor = 'white'; 
+  let selectedView = 'back';
+
+  function updateProductImage() {
+    const mainImage = document.getElementById('mainProductImage');
+    const thumbnailFront = document.getElementById('thumbnailFront');
+    const thumbnailBack = document.getElementById('thumbnailBack');
+
+    if (productImages[currentProductType] && productImages[currentProductType][selectedColor]) {
+      const paths = productImages[currentProductType][selectedColor];
+      
+      if (mainImage) mainImage.src = paths[selectedView];
+      if (thumbnailFront) thumbnailFront.src = paths['front'];
+      if (thumbnailBack) thumbnailBack.src = paths['back'];
     }
-  </script>
-</body>
+
+    document.querySelectorAll('.thumbnails img').forEach(img => img.classList.remove('active'));
+    
+    if (selectedView === 'front' && thumbnailBack) {
+      thumbnailFront.classList.add('active');
+    } else if (selectedView === 'back' && thumbnailFront) {
+      thumbnailBack.classList.add('active');
+    }
+  }
+
+  function selectColor(color) {
+    selectedColor = color;
+    updateProductImage();
+
+    document.querySelectorAll(".color-swatch").forEach(swatch => {
+      swatch.classList.toggle('active', swatch.dataset.color === color);
+    });
+  }
+
+  function changeView(view) {
+    selectedView = view;
+    updateProductImage();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    updateProductImage();
+  });
+</script>
+<script src="/CSS/cart.js"></script>
+<div id="cartModal" class="cart-modal">
+  <div class="cart-modal-content">
+    <span class="close-button">&times;</span>
+    <h2>Your Shopping Cart</h2>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-summary">
+      <p>Total: $<span id="cartTotal">0.00</span></p>
+      <button class="button" id="checkoutButton">Proceed to Checkout</button>
+      <button class="button clear-cart-button" id="clearCartButton">Clear Cart</button>
+    </div>
+  </div>
+</div>
 </html>
