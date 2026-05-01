@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +8,20 @@
   <link rel="stylesheet" href="CSS/styles.css">
   <link rel="website icon" href="/Logo/logo.png">
 </head>
-<body>    
+<body>
+  <!-- Cinematic Preloader -->
+  <div id="preloader">
+    <div class="loader-content">
+      <img src="Logo/logo.png" alt="logo" class="loader-logo">
+      <h2 style="color: #ff4500; margin-top: 20px; letter-spacing: 5px; font-style: italic;">LOADING...</h2>
+    </div>
+  </div>
+
   <header>
     <div class="logo-container">
       <img src="Logo/logo.png" alt="logo" class="logo">
     </div>
-      <h1 style="font-family: the Billion Monoline;"> 212 CLOTHING </h1>
+      <h1> 212 CLOTHING </h1>
     <nav>
       <a href="#index">Home</a>
       <a href="#products">Products</a>
@@ -161,5 +170,30 @@
     </div>
   </div>
 </div>
+  <script>
+    // Preloader Script
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('preloader');
+      setTimeout(() => {
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+          preloader.style.visibility = 'hidden';
+        }, 800);
+      }, 1500); // Show for 1.5s for cinematic effect
+    });
+
+    // Scroll Reveal Script
+    const revealElements = document.querySelectorAll('.product, .see-more-container');
+    const revealOnScroll = () => {
+      revealElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          el.classList.add('reveal', 'active');
+        }
+      });
+    };
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+  </script>
 </body>
 </html>

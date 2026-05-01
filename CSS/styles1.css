@@ -702,3 +702,69 @@ nav {
   border-color: #666;
   transform: translateY(-2px);
 }
+/* =========================================
+   CINEMATIC PRODUCT ENHANCEMENTS
+   ========================================= */
+
+/* Image Zoom on Hover */
+.main-image img {
+  transition: transform 1.2s cubic-bezier(0.15, 0.83, 0.66, 1);
+  cursor: zoom-in;
+}
+
+.main-image:hover img {
+  transform: scale(1.05);
+}
+
+/* Button Glow and Shine */
+.button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: 0.6s;
+  z-index: -1;
+}
+
+.button:hover::before {
+  left: 100%;
+}
+
+.button:hover {
+  box-shadow: 0 0 20px rgba(255, 69, 0, 0.6);
+  transform: translateY(-3px);
+}
+
+/* Color Swatch Animation */
+.color-swatch {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s;
+}
+
+.color-swatch:hover {
+  transform: scale(1.3);
+}
+
+.color-swatch.active {
+  box-shadow: 0 0 15px var(--neon-orange);
+}
+
+/* Smooth Entrance for Details */
+.details > * {
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+.details h2 { animation-delay: 0.1s; }
+.details .price { animation-delay: 0.2s; }
+.details p { animation-delay: 0.3s; }
+.details .color-options { animation-delay: 0.4s; }
+.details .button { animation-delay: 0.5s; }
+
+
