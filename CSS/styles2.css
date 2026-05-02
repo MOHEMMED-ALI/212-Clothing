@@ -707,3 +707,16 @@ nav a:hover {
   height: 24px;
   filter: invert(1) opacity(0.5);
 }
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column; /* Stacks the logo on top of the nav */
+    gap: 15px; /* Adds breathing room between the logo and links */
+  }
+  
+  nav {
+    flex-wrap: wrap; /* Allows links to drop to a new line instead of stretching the screen */
+    justify-content: center; /* Centers the links under the logo */
+    width: 100%;
+  }
+}
