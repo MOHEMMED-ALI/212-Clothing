@@ -135,7 +135,6 @@
       console.error(`Images not found for ${currentProductType}, color ${selectedColor}`);
     }
 
-    // Update active class for thumbnails
     document.querySelectorAll('.thumbnails img').forEach(img => img.classList.remove('active'));
     if (selectedView === 'front') {
       thumbnailFront.classList.add('active');
