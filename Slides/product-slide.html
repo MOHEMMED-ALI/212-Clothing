@@ -22,39 +22,41 @@
   </header>
   <main class="container">  
     <div class="image-box">
-  <div class="main-image">
-  <img id="mainProductImage" src="/Slides/Slide.jpg" alt="Biker Slides">
-  </div>
-  <div class="thumbnails">
-    <img id="thumbnailFront" src="/Slides/Slide.jpg" alt="Front" class="active" onclick="changeView('front')">
-    <img id="thumbnailBack" src="/Slides/Slide².jpg" alt="Back"  onclick="changeView('back')">
-    <img id="thumbnailSide" src="/Slides/Slide²².jpg" alt="Side"  onclick="changeView('side')">
-  </div>
-</div>
-<div class="details">
-  <h2 id="productName">"Road Rebel" Street Slides</h2> 
-  <p>Step into the rebellion. High-contrast branding meets ergonomic design. Featuring a durable PVC strap and an EVA foam sole for a cloud-like feel. Available in multiple colorways to fit your style.</p>
-  <p class="price">$<span id="productPrice">39.99</span></p>
-  <p><strong>Sizes:</strong>
-    <select id="productSize" style="padding: 5px; border-radius: 5px; background: #222; color: #fff; border: 1px solid #444;">
-      <option value="S">S</option>
-      <option value="M">M</option>
-      <option value="L">L</option>
-      <option value="XL">XL</option>
-      <option value="XXL">XXL</option>
-    </select>
-  </p>
-  <div class="color-options">
-    <strong>Colors:</strong>
-    <button class="color-swatch active" style="background-color: green;" data-color="green" onclick="selectColor('green')"></button>
-    <button class="color-swatch" style="background-color: gray;" data-color="gray" onclick="selectColor('gray')"></button>
-    <button class="color-swatch" style="background-color: yellow;" data-color="yellow" onclick="selectColor('yellow')"></button>
-    <button class="color-swatch" style="background-color: red;" data-color="red" onclick="selectColor('red')"></button>
-    <button class="color-swatch" style="background-color: orange;" data-color="orange" onclick="selectColor('orange')"></button>
-  </div>
-  <button class="button" id="addToCartButton" style="margin-bottom: 10px;">Add to Cart</button>
-  <button class="button" onclick="window.open('https://my-store-e6f49b.creator-spring.com/listing/slides-biker-s?product=1895&variation=105485', '_blank')">Buy Now (Direct)</button>
-</div>
+      <div class="main-image">
+      <img id="mainProductImage" src="/Slides/Slide.jpg" alt="Biker Slides">
+      </div>
+      <div class="thumbnails">
+        <img id="thumbnailFront" src="/Slides/Slide.jpg" alt="Front" class="active" onclick="changeView('front')">
+        <img id="thumbnailBack" src="/Slides/Slide².jpg" alt="Back"  onclick="changeView('back')">
+        <img id="thumbnailSide" src="/Slides/Slide²².jpg" alt="Side"  onclick="changeView('side')">
+      </div>
+    </div>
+    <div class="details">
+      <h2 id="productName">"Road Rebel" Street Slides</h2> 
+      <p>Step into the rebellion. High-contrast branding meets ergonomic design. Featuring a durable PVC strap and an EVA foam sole for a cloud-like feel. Available in multiple colorways to fit your style.</p>
+      <p class="price">$<span id="productPrice">39.99</span></p>
+      <p><strong>Sizes:</strong>
+        <select id="productSize" style="padding: 5px; border-radius: 5px; background: #222; color: #fff; border: 1px solid #444;">
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          <option value="XXL">XXL</option>
+        </select>
+      </p>
+      <div class="color-options">
+        <strong>Colors:</strong>
+        <button class="color-swatch active" style="background-color: green;" data-color="green" onclick="selectColor('green')"></button>
+        <button class="color-swatch" style="background-color: gray;" data-color="gray" onclick="selectColor('gray')"></button>
+        <button class="color-swatch" style="background-color: yellow;" data-color="yellow" onclick="selectColor('yellow')"></button>
+        <button class="color-swatch" style="background-color: red;" data-color="red" onclick="selectColor('red')"></button>
+        <button class="color-swatch" style="background-color: orange;" data-color="orange" onclick="selectColor('orange')"></button>
+      </div>
+      <div>
+        <button class="button" id="addToCartButton" style="margin-bottom: 10px;">Add to Cart</button>
+        <button class="button" onclick="window.open('https://my-store-e6f49b.creator-spring.com/listing/slides-biker-s?product=1895&variation=105485', '_blank')">Buy Now (Direct)</button>
+      </div>
+    </div>
   </main>
   <footer class="footer">
     <p>Contact us at: support@212clothing.com | &copy; 2026 212 Clothing</p>
@@ -70,6 +72,19 @@
       </a>
     </div>  
   </footer>
+  <div id="cartModal" class="cart-modal">
+  <div class="cart-modal-content">
+    <span class="close-button">&times;</span>
+    <h2>Your Shopping Cart</h2>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-summary">
+      <p>Total: $<span id="cartTotal">0.00</span></p>
+      <button class="button" id="checkoutButton">Proceed to Checkout</button>
+      <button class="button clear-cart-button" id="clearCartButton">Clear Cart</button>
+    </div>
+  </div>
+</div>
+<script src="/CSS/cart.js"></script>
   <script>
   const productImages = {
     'Slide': {
@@ -161,18 +176,6 @@
     updateProductImage();
   });
 </script>
-<script src="/CSS/cart.js"></script>
-<div id="cartModal" class="cart-modal">
-  <div class="cart-modal-content">
-    <span class="close-button">&times;</span>
-    <h2>Your Shopping Cart</h2>
-    <div id="cartItems" class="cart-items"></div>
-    <div class="cart-summary">
-      <p>Total: $<span id="cartTotal">0.00</span></p>
-      <button class="button" id="checkoutButton">Proceed to Checkout</button>
-      <button class="button clear-cart-button" id="clearCartButton">Clear Cart</button>
-    </div>
-  </div>
-</div>
+
 </body>
 </html>
