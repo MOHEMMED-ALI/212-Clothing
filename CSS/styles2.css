@@ -720,3 +720,29 @@ nav a:hover {
     width: 100%;
   }
 }
+
+.product-card-colors {
+  margin: 10px 0;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.color-swatches-container {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.listing-color-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.listing-color-swatch:hover, .listing-color-swatch.active {
+  border-color: #ff4500;
+  transform: scale(1.2);
+}
+.listing-color-swatch.active {
+  box-shadow: 0 0 10px #ff4500;
+}

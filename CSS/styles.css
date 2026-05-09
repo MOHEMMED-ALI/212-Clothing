@@ -1047,3 +1047,29 @@ nav a:hover {
 
 .shard { background: #000; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
 .break-active .shard { opacity: 0; transform: scale(1.5) rotate(45deg) translate(var(--tx), var(--ty)); }
+
+.product-card-colors {
+  margin: 10px 0;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.color-swatches-container {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.listing-color-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.listing-color-swatch:hover, .listing-color-swatch.active {
+  border-color: #ff4500;
+  transform: scale(1.2);
+}
+.listing-color-swatch.active {
+  box-shadow: 0 0 10px #ff4500;
+}
