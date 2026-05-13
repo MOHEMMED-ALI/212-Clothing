@@ -746,3 +746,9 @@ nav a:hover {
 .listing-color-swatch.active {
   box-shadow: 0 0 10px #ff4500;
 }
+
+.listing-color-swatch.active {
+    border-color: #ff4500 !important;
+    box-shadow: 0 0 8px #ff4500;
+    transform: scale(1.2);
+}

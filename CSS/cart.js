@@ -206,3 +206,123 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateCartUI();
 });
+
+/**
+ * 212 CLOTHING - ULTIMATE COLOR SWITCHER
+ * This script imports colors from product pages and handles image switching.
+ */
+const ColorSwitcher = {
+    cache: {},
+
+    async init() {
+        // Check if running on file:// protocol
+        if (window.location.protocol === 'file:') {
+            console.warn("COLOR SWITCHER: You are running on file://. Fetch is blocked by browsers. Please use a local server (Live Server).");
+        }
+
+        const cards = document.querySelectorAll('.product');
+        for (let card of cards) {
+            const link = card.querySelector('a');
+            if (link) {
+                const url = link.getAttribute('href');
+                this.setupCard(card, url);
+            }
+        }
+    },
+
+    async setupCard(card, url) {
+        try {
+            // Resolve absolute URL for fetching
+            const absoluteUrl = new URL(url, window.location.href).href;
+            
+            if (!this.cache[absoluteUrl]) {
+                const resp = await fetch(absoluteUrl);
+                const html = await resp.text();
+                const doc = new DOMParser().parseFromString(html, 'text/html');
+                
+                // 1. Extract Colors from swatches
+                const colors = Array.from(doc.querySelectorAll('.color-swatch')).map(s => ({
+                    name: (s.dataset.color || s.getAttribute('data-color') || "").trim().toLowerCase(),
+                    label: (s.dataset.color || s.getAttribute('data-color') || ""),
+                    css: s.style.backgroundColor || "#ccc"
+                })).filter(c => c.name);
+
+                // 2. Extract Images (Handles nested objects and unquoted keys)
+                const imgData = {};
+                const scriptMatch = html.match(/const productImages = (\{[\s\S]*?\});/);
+                if (scriptMatch) {
+                    const content = scriptMatch[1];
+                    // Regex to find any block that contains "front"
+                    const blocks = content.matchAll(/([a-zA-Z0-9_-]+|['"][^'"]+['"])\s*:\s*\{([^{}]*?['"]?front['"]?[^{}]*?)\}/g);
+                    for (const b of blocks) {
+                        const key = b[1].replace(/['"]/g, "").trim().toLowerCase();
+                        const blockContent = b[2];
+                        const f = blockContent.match(/['"]?front['"]?\s*:\s*['"]([^'"]+)['"]/);
+                        const bk = blockContent.match(/['"]?back['"]?\s*:\s*['"]([^'"]+)['"]/);
+                        if (f || bk) imgData[key] = { front: f?.[1], back: bk?.[1] };
+                    }
+                }
+
+                this.cache[absoluteUrl] = { 
+                    colors, 
+                    imgData, 
+                    base: absoluteUrl.substring(0, absoluteUrl.lastIndexOf('/') + 1) 
+                };
+            }
+
+            const { colors, imgData, base } = this.cache[absoluteUrl];
+            if (colors.length === 0) return;
+
+            // 3. Replace Description with Swatches
+            const pTags = card.querySelectorAll('p');
+            let targetP = Array.from(pTags).find(p => p.textContent.toLowerCase().includes('description'));
+            
+            if (targetP) {
+                const container = document.createElement('div');
+                container.className = 'product-card-colors';
+                container.style.cssText = "display:flex; justify-content:center; gap:8px; padding:12px 0; border-top:1px solid rgba(255,255,255,0.1); margin-top:10px;";
+                
+                colors.forEach((c, i) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'listing-color-swatch' + (i === 0 ? ' active' : '');
+                    btn.style.cssText = `background-color:${c.css}; width:24px; height:24px; border-radius:50%; border:2px solid #444; cursor:pointer; transition:0.3s;`;
+                    btn.title = c.label;
+                    
+                    btn.onclick = (e) => {
+                        e.preventDefault(); e.stopPropagation();
+                        
+                        // UI Update
+                        container.querySelectorAll('button').forEach(b => {
+                            b.style.borderColor = "#444"; b.style.transform = "scale(1)";
+                        });
+                        btn.style.borderColor = "#ff4500"; btn.style.transform = "scale(1.2)";
+                        
+                        // Image Update
+                        const img = card.querySelector('img');
+                        const isBack = decodeURIComponent(img.src).includes('²');
+                        const data = imgData[c.name];
+                        
+                        if (data) {
+                            let newPath = (isBack && data.back) ? data.back : (data.front || data.back);
+                            if (newPath) {
+                                // Fix pathing: if it starts with / it's absolute, otherwise relative to product page
+                                img.src = newPath.startsWith('/') ? newPath : base + newPath;
+                            }
+                        }
+                    };
+                    container.appendChild(btn);
+                });
+                targetP.replaceWith(container);
+            }
+        } catch (err) {
+            console.error("ColorSwitcher Error:", url, err);
+        }
+    }
+};
+
+// Auto-run
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => ColorSwitcher.init());
+} else {
+    ColorSwitcher.init();
+}
