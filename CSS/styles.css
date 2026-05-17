@@ -38,9 +38,10 @@
 }
 
 body {
-  background-color: #080808; 
+  background-color: #080808;
   color: #ffffff;
   overflow-x: hidden;
+  position: relative;
 }
 
 /* =========================================
@@ -109,9 +110,10 @@ nav a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-attachment: fixed;
-  animation: slowPan 20s linear infinite;
+  /* background-attachment: fixed; */
+  /* animation: slowPan 20s linear infinite; */
   position: relative;
+  z-index: 1;
 }
 
 .hero::before {
@@ -119,10 +121,11 @@ nav a:hover {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
 }
-
 .hero h2 {
   position: relative;
+  z-index: 2; /* Ensure text is above Vanta.js canvas */
   font-size: 4rem;
   color: #fff;
   text-transform: uppercase;
@@ -141,7 +144,9 @@ nav a:hover {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 40px;
-  background: radial-gradient(circle at top, #111 0%, #080808 100%);
+  background: transparent;
+  position: relative;
+  z-index: 1;
 }
 
 .product {
@@ -190,10 +195,12 @@ nav a:hover {
 
 .see-more-container {
   padding: 10px 0 80px;
-  background: #080808;
+  background: transparent;
   display: flex;         /* Use Flex to center */
   justify-content: center; 
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .see-more-btn {
@@ -223,7 +230,7 @@ nav a:hover {
    ========================================= */
 
 .footer {
-  background: #050505; /* Solid deep black for contrast */
+  background: rgba(5, 5, 5, 0.7); /* Semi-transparent for Vanta effect */
   color: #666; /* Subdued text color */
   padding: 60px 20px;
   text-align: center;
@@ -813,8 +820,8 @@ nav a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-attachment: fixed;
-  animation: slowPan 20s linear infinite;
+  /* background-attachment: fixed; */
+  /* animation: slowPan 20s linear infinite; */
   position: relative;
   text-align: center;
   padding: 0 20px;
@@ -829,6 +836,7 @@ nav a:hover {
 
 .hero h2 {
   position: relative;
+  z-index: 2; /* Ensure text is above Vanta.js canvas */
   font-size: clamp(1.5rem, 8vw, 4rem);
   color: #fff;
   text-transform: uppercase;
