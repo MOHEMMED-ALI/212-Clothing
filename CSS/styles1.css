@@ -1,3 +1,4 @@
+
 /* =========================================
    1. ANIMATION KEYFRAMES (The Magic)
    ========================================= */
@@ -174,6 +175,8 @@ nav a:hover::after {
   cursor: pointer;
   transition: all 0.3s;
   opacity: 0.6;
+  object-fit: contain;
+  background: #141414;
 }
 
 .thumbnails img:hover, .thumbnails img.active {
@@ -889,9 +892,10 @@ nav a:hover {
 }
 
 .thumbnails img {
-  width: clamp(60px, 15vw, 100px);
+  width: clamp(60px, 15vw, 60px);
   aspect-ratio: 1/1;
-  object-fit: cover;
+  object-fit: contain;
+  background: #141414;
   border-radius: 10px;
   cursor: pointer;
   border: 2px solid transparent;
